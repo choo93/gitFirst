@@ -21,5 +21,6 @@ public abstract class Grade {
 		return "name=" + name + ", grade=" + grade + ", point=" + point;
 	}
 	
+	// 다른 사람이 수정
 	
 }
