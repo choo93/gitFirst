@@ -22,5 +22,6 @@ public abstract class Grade {
 	}
 	
 	// 다른 사람이 수정
+	// 다른 사람이 두번째 
 	
 }
