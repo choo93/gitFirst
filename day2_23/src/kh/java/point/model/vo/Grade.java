@@ -15,4 +15,11 @@ public abstract class Grade {
 	public String getGrade(){return grade;}
 	public int getPoint()	{return point;}
 	public abstract double getInterest();
+
+	@Override
+	public String toString() {
+		return "name=" + name + ", grade=" + grade + ", point=" + point;
+	}
+	
+	
 }
