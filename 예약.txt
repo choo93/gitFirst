@@ -1,0 +1,98 @@
+@@ 공연 정보 테이블 - showInfo @@
+
+-공연 번호(showNum)	number
+	-> 시퀀스 활용(시퀀스는 다른 모든 게시물에서 함께 활용하는 걸로 했으면...)
+
+-공연 제목(showTiltle)	varchar2(90)	not null, unique
+-요약 설명(showSummary)	varchar2(60)
+-메인 사진(showPhoto)	varchar2(60)
+-공연 기간(showDate)	date		not null
+
+-공연 장르(showGanre)	varchar2(20)	not null
+-장소(showAddress)	varchar2(60)	not null
+-연령대(showAge)	varchar2(15)
+-가격(showPrice)	number		not null
+
+-설명(showExplain)	varchar2(2000)
+-전화번호(showPhone)	varchar2(13)
+-웹사이트(showSite)	varchar2(20)
+-교통안내(showTraffic)	varchar2(100)
+
+-위도(latitude)		number		not null
+-경도(longtitude)	number		not null
+	-> 지도 API에서 활용할 정보
+
+-*댓글(다른 테이블에서 참조) -> 댓글 테이블에서 하는걸로
+[ 댓글번호(number, 시퀀스 활용), 게시물 번호(number, 다른 테이블 참조),
+	댓글내용(varchar2(200)), 댓글 작성자(varchar2(20) ]
+
+
+@@ 공연 예약 테이블 - showReserve @@
+-예약 번호(showReserveNum)	number		not null, unique
+	-> 시퀀스 활용(공연 예약 전용 시퀀스)
+-예약 공연 이름(showReserveTitle)	varchar2(90)	foreign key
+-결제 가격(showPrice)		number		not null
+-예약 시간(showReserveTime)	date		not null
+-예약 날짜(showReserveDate)	timestamp	not null
+
+
+
+
+
+
+@@ 호텔정보 테이블 - hotelInfo @@
+
+-호텔 이름(hotelName)		varchar2(30) 	not null
+-호텔 사진(hotelPhoto)		varchar2(60) 	not null
+-호텔 장소(hotelAddress)	varchar2(60) 	not null
+
+
+-방별 가격들(hotelRoomPrice)	varchar2(100)	not null
+-방 인원 정보들(hotelRoomCapacity)	num
+
+
+-hotelPeopleNum(호텔 예약 인원)	number
+-hotelPhone (호텔 전화번호)		varchar2(13) 	not null
+-hotelExplanation (호텔 설명)		varchar2(2000)
+
+@@ 어떤 방을 선택할지, 각 방은 가격 수용인원등이 다름
+
+
+@@ 호텔 예약 테이블 - hotelReserve @@
+-호텔 예약 번호			number	not null, unique
+	-> 시퀀스 활용(호텔예약 전용 시퀀스)
+-방번호()	number	not null
+-hotelDate (호텔 예약 날짜)	date	not null
+-hotelPrice (결제 가격)		number	not null
+
+
+
+
+
+
+@@ 도보 관광 정보 - doboInfo @@
+-도보 번호(doboNum)		number		not null
+	-> 도보 관광 정보 전용 시퀀스
+-도보 이름(doboTitle)		varchar2(30)	not null, unique
+-도보 사진(doboPhoto)		varchar2(60)	not null
+-요약 설명(doboSummery)		varchar2(60)
+-도보관광설명(doboExplain)	varchar2(2000) 
+
+
+@@ 도보관광 예약 테이블 - doboReserve @@	비회원도 예약 가능
+
+-예약 번호					number		not null, unique
+	-> 도보 관광 예약 전용 시퀀스
+-예약 도보 이름(doboReserveTitle)	varchar2(30)	foreign key
+-회원이름(doboReserveUserName)		varchar2(20)	not null
+-성별(doboReserveGender)	varchar2(1)	not null
+-국적(doboReserveNation)	varchar2(20)
+-휴대폰번호(doboReservePhone)	varchar2(13)	not null
+-하고 싶은말(doboReserveComment)	varchar2(1000)
+
+
+
+
+
+
+
