@@ -4,8 +4,7 @@ public class HelloJava {
 
 	public static void main(String[] args) {
 		System.out.println("Hello java");
-    
-//		second 수정
+//		first 
 
 	}
 
