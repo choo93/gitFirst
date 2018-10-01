@@ -1,0 +1,57 @@
+package linkedlist;
+
+public class MyList {
+	private Node start;
+	private Node node[] = new Node[0];
+	private int index = 0;
+
+	public void add(int value) {
+		Node node2[] = node;		// 옮겨놓기 위해 임시로 저장
+		node = new Node[index+1];
+
+		for(int i=0; i<index; i++) {
+			node[i] = node2[i];
+		}
+
+		node[index] = new Node();
+		node[index].setValue(value);
+
+		if(index == 0) {
+			start = node[0];
+		}else {		// 넣은 횟수가 2번 이상일 때
+			node[index-1].setNext(node[index]);
+		}
+
+		index++;
+	}
+
+	public int size() {
+		int num = 1;
+		Node n = start;
+
+		if(n != null) {
+			while(n.getNext() != null) {
+				num++;
+				n = n.getNext();
+			}
+			return num;
+		}else {
+			return 0;
+		}
+		
+	}
+
+	public void printAll() {
+		Node n = start;
+		
+		if(n != null) {
+			while(n != null) {
+				System.out.println(n);
+				n = n.getNext();
+			}
+		}else {
+			System.out.println("데이터가 없습니다.");
+		}
+		
+	}
+}
