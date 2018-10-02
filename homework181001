@@ -1,57 +1,139 @@
-package linkedlist;
+package homework;
 
 public class MyList {
 	private Node start;
-	private Node node[] = new Node[0];
-	private int index = 0;
 
-	public void add(int value) {
-		Node node2[] = node;		// 옮겨놓기 위해 임시로 저장
-		node = new Node[index+1];
+	public void printAll() {
+		Node newNode = start;
 
-		for(int i=0; i<index; i++) {
-			node[i] = node2[i];
+		while (newNode != null) { // 마지막 노드 꺼내기
+			System.out.print(newNode.getValue() + "\t");
+			newNode = newNode.getNext();
 		}
-
-		node[index] = new Node();
-		node[index].setValue(value);
-
-		if(index == 0) {
-			start = node[0];
-		}else {		// 넣은 횟수가 2번 이상일 때
-			node[index-1].setNext(node[index]);
-		}
-
-		index++;
+		System.out.println();
 	}
 
 	public int size() {
-		int num = 1;
-		Node n = start;
+		int num = 0;
+		Node newNode = start;
 
-		if(n != null) {
-			while(n.getNext() != null) {
-				num++;
-				n = n.getNext();
-			}
-			return num;
-		}else {
-			return 0;
+		while (newNode != null) { // 마지막 노드 꺼내기
+			newNode = newNode.getNext();
+			num++;
 		}
-		
+
+		return num;
+
 	}
 
-	public void printAll() {
-		Node n = start;
-		
-		if(n != null) {
-			while(n != null) {
-				System.out.println(n);
-				n = n.getNext();
+	public void add(int value) {
+		if (start == null) { // 처음일 때
+			start = new Node();
+			start.setValue(value);
+		} else { // 처음이 아닐 때
+			Node newNode = start;
+
+			while (newNode.getNext() != null) { // 마지막 노드 꺼내기
+				newNode = newNode.getNext();
 			}
-		}else {
-			System.out.println("데이터가 없습니다.");
+
+			newNode.setNext(new Node()); // 마지막 노드가 새로운 다음 노드 가리키게 하기
+
+			newNode.getNext().setValue(value); // 새로운 노드에 값 넣기
+
 		}
-		
+
+	}
+
+	public void add(int index, int value) {
+
+		if (index > 0) {
+			if (index == 1) {
+				Node newNode = new Node();
+				newNode.setValue(value);
+				newNode.setNext(start);
+				start = newNode;
+			} else {
+
+				if (index - 1 > size()) {
+					System.out.println("리스트의 크기를 벗어낫습니다.");
+				} else {
+					Node newNode = start;
+
+					while (index-- > 2) { // 선택한 인덱스 번째 이전의 노드 꺼내기
+						newNode = newNode.getNext();
+					}
+
+					Node tempNode = newNode.getNext(); // 임시로 넣을 노드의 다음 노드 저장
+
+					newNode.setNext(new Node()); // 마지막 노드가 새로운 다음 노드 가리키게 하기
+
+					newNode.getNext().setValue(value); // 새로운 노드에 값 넣기
+
+					newNode.getNext().setNext(tempNode);
+				}
+			}
+		} else {
+			System.out.println("1 이상의 인덱스를 입력");
+		}
+	}
+
+	public int get(int index) {
+		if (index > 0) {
+			if (index == 1) {
+				return start.getValue();
+			} else {
+				if(index > size()){
+					System.out.println("입력한 값이 배열의 크기보다 큽니다.");
+					return -99999;
+				}else{
+
+					Node newNode = start;
+
+					while (index-- > 2) { // 선택한 인덱스 번째 이전의 노드 꺼내기
+						newNode = newNode.getNext();
+					}
+
+					return newNode.getNext().getValue();
+
+				}
+			}
+		} else {
+			System.out.println("1 이상의 인덱스를 입력");
+			return -999999;
+		}
+
+	}
+
+	public void remove(int index) {
+		if (index > 0) {
+			if (index > size()) {
+				System.out.println("입력한 값이 배열의 크기보다 큽니다.");
+			} else {
+				if (index == 1) {
+					if (size() == 1) {
+						removeAll();
+					} else {
+						start = start.getNext();
+					}
+
+				} else {
+
+					Node selectedNode = start;
+
+					while (index-- > 2) { // 선택한 인덱스 번째 이전의 노드 꺼내기
+						selectedNode = selectedNode.getNext();
+					}
+					selectedNode.setNext(selectedNode.getNext().getNext()); // 선택한 인덱스번째 이전의 노드가 자신의 다음 다음 노드 가리키게 하기
+
+				}
+			}
+		} else {
+			System.out.println("1 이상의 인덱스를 입력");
+		}
+	}
+
+	public void removeAll() {
+		start = null;
 	}
 }
